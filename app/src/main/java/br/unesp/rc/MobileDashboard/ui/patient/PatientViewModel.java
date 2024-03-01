@@ -1,33 +1,31 @@
 package br.unesp.rc.MobileDashboard.ui.patient;
 
 
-import static android.R.color.black;
 
 import android.content.Context;
 import android.graphics.Typeface;
 import android.graphics.drawable.GradientDrawable;
-import android.util.TypedValue;
 import android.view.Gravity;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
+
 import androidx.lifecycle.ViewModel;
 
-import br.unesp.rc.MobileDashboard.R;
 
 public class PatientViewModel extends ViewModel {
 
     public LinearLayout createDynamicLayout(Context context) {
-
+        //Criando LinearLayout
         LinearLayout containerLayout = new LinearLayout(context);
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT, // largura
                 LinearLayout.LayoutParams.WRAP_CONTENT // altura
         );
 
+        // Adicionas margens ao layout
         layoutParams.setMargins(
                 20 * (int) context.getResources().getDisplayMetrics().density, // margem esquerda
                 10 * (int) context.getResources().getDisplayMetrics().density, // margem superior
@@ -37,9 +35,10 @@ public class PatientViewModel extends ViewModel {
         containerLayout.setLayoutParams(layoutParams);
         containerLayout.setOrientation(LinearLayout.VERTICAL);
 
-        // Adiciona borda arredondada
+        // Adiciona borda arredondada ao layout
         containerLayout.setBackground(createRoundRectDrawable(context));
 
+        //Criando os TextFields
         String[] labels = {"Name:", "Age:", "Height:", "Weight:"};
         for (int i = 0; i < labels.length; i++) {
             TextView textView = new TextView(context);
@@ -79,7 +78,7 @@ public class PatientViewModel extends ViewModel {
         GradientDrawable drawable = new GradientDrawable();
         drawable.setShape(GradientDrawable.RECTANGLE);
         drawable.setCornerRadius(dpToPx(context, 10)); // Define o raio do canto
-        drawable.setColor(context.getColor(android.R.color.darker_gray)); // Cor do fundo
+        drawable.setColor(context.getColor(android.R.color.system_background_light)); // Cor do fundo
         drawable.setStroke(dpToPx(context, 1), 0x80FFFFFF); // Cor da borda e largura da borda
         return drawable;
     }

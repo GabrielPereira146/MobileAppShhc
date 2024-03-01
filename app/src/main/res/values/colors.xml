@@ -4,7 +4,7 @@
     <color name="Blue_Celadon">#247BA0</color>
     <color name="Blue_Carolina">#1B98E0</color>
     <color name="Blue_Prussian">#13293D</color>
-    <color name="Background">#FAF9FD</color>
+    <color name="Background">#FFFFFFFF</color>
     <color name="GrayLight">#d8e6e6</color>
     <color name="Gray">#A8B3B3</color>
     <color name="BackgorundDark">#000000</color>#000000
