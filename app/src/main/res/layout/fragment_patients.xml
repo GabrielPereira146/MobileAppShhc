@@ -3,11 +3,13 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scroll"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_constraintTop_toTopOf="parent"
     tools:layout_editor_absoluteX="16dp"
     android:background="?attr/colorOnBackground"
+    android:contentDescription="Scroll for Data Patient"
     tools:context=".ui.patient.PatientFragment">
 
     <LinearLayout
