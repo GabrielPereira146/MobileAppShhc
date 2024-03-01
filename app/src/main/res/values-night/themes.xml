@@ -13,6 +13,6 @@
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
         <item name="colorBackgroundFloating">@color/BackgorundDark</item>
-        <item name="colorOnBackground">@color/GrayDark2</item>
+        <item name="colorOnBackground">@color/GrayDark</item>
     </style>
 </resources>

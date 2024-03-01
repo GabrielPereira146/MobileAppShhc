@@ -26,13 +26,15 @@ public class PatientFragment extends Fragment {
         binding = FragmentPatientsBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
         //While(Consumir da API)
-        createDynamicLayout(root, patientViewModel);
+        for (int i= 0; i<10; i++){
+            createDynamicLayout(root, patientViewModel);
+        }
+
         return root;
     }
 
     private void createDynamicLayout(View root,  PatientViewModel patientViewModel) {
         LinearLayout containerLayout = root.findViewById(R.id.container);
-        //containerLayout.removeAllViews(); // Remove qualquer conteúdo anterior
         LinearLayout dynamicLayout = patientViewModel.createDynamicLayout(requireContext());
         containerLayout.addView(dynamicLayout);
     }

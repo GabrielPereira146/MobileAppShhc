@@ -13,7 +13,7 @@
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
         <item name="colorOnBackground">@color/Background</item>
-        <item name="colorBackgroundFloating">@color/GrayLight</item>
+        <item name="colorBackgroundFloating">@color/Gray</item>
     </style>
 
     <style name="Theme.MobileDashboard.NoActionBar">

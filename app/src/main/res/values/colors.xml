@@ -4,10 +4,11 @@
     <color name="Blue_Celadon">#247BA0</color>
     <color name="Blue_Carolina">#1B98E0</color>
     <color name="Blue_Prussian">#13293D</color>
-    <color name="Background">#E8F1F2</color>
+    <color name="Background">#FAF9FD</color>
     <color name="GrayLight">#d8e6e6</color>
     <color name="Gray">#A8B3B3</color>
-    <color name="BackgorundDark">#484D4D</color>
+    <color name="BackgorundDark">#000000</color>#000000
+    <color name="GrayDark">#484D4D</color>
     <color name="GrayDark2">#181919</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
