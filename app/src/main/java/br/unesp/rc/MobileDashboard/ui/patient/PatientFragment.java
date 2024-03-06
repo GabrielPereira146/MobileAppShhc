@@ -1,11 +1,13 @@
 package br.unesp.rc.MobileDashboard.ui.patient;
 
-import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -65,22 +67,42 @@ public class PatientFragment extends Fragment {
 
     private void setLayoutSelected(LinearLayout containerLayout) {
         String[] labels = {"Temperature", "Blood Pressure", "Glucose", "Heart Rate", "Air Flow", "Oxygen"};
-        for (String label : labels){
-            LinearLayout containerSensors = new LinearLayout(containerLayout.getContext());
+        for (String label : labels) {
+
+            // Cria um novo LinearLayout (pane)
+            LinearLayout pane = new LinearLayout(containerLayout.getContext());
+
+            // Cria parâmetros de layout com margens
             LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
-                    100 * (int) requireContext().getResources().getDisplayMetrics().density, // largura
-                    50 * (int) requireContext().getResources().getDisplayMetrics().density // altura
+                    150 * (int) containerLayout.getContext().getResources().getDisplayMetrics().density,
+                    150 * (int) containerLayout.getContext().getResources().getDisplayMetrics().density
             );
 
-            // Adicionas margens ao layout
-            layoutParams.setMargins(
-                    5 * (int) containerLayout.getContext().getResources().getDisplayMetrics().density, // margem esquerda
-                    10 * (int) containerLayout.getContext().getResources().getDisplayMetrics().density, // margem superior
-                    5 * (int) containerLayout.getContext().getResources().getDisplayMetrics().density, // margem direita
-                    10 * (int) containerLayout.getContext().getResources().getDisplayMetrics().density // margem inferior
-            );
-            containerLayout.setLayoutParams(layoutParams);
-            containerLayout.setOrientation(LinearLayout.VERTICAL);
+            // Define as margens desejadas (esquerda, superior, direita, inferior)
+            layoutParams.setMargins(20 * (int) containerLayout.getContext().getResources().getDisplayMetrics().density,
+                    10 * (int) containerLayout.getContext().getResources().getDisplayMetrics().density,
+                    20 * (int) containerLayout.getContext().getResources().getDisplayMetrics().density,
+                    10 * (int) containerLayout.getContext().getResources().getDisplayMetrics().density);
+
+            // Define os parâmetros de layout no LinearLayout
+            pane.setLayoutParams(layoutParams);
+
+            pane.setBackgroundColor( containerLayout.getContext().getColor(android.R.color.darker_gray));
+            pane.setOrientation(LinearLayout.HORIZONTAL);
+
+            // Outros componentes ao "pane",
+            TextView textView = new TextView(containerLayout.getContext());
+            textView.setLayoutParams(new ViewGroup.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT
+            ));
+            textView.setGravity(Gravity.CENTER);
+            textView.setTypeface(null, Typeface.BOLD);
+            textView.setText(label);
+            pane.addView(textView);
+
+            // Adiciona o "pane" ao LinearLayout principal
+            containerLayout.addView(pane);
         }
     }
 
