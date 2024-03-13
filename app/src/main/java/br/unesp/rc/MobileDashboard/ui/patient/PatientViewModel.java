@@ -11,7 +11,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 
+import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModel;
+
+import br.unesp.rc.MobileDashboard.R;
 
 
 public class PatientViewModel extends ViewModel {
@@ -77,7 +80,7 @@ public class PatientViewModel extends ViewModel {
         GradientDrawable drawable = new GradientDrawable();
         drawable.setShape(GradientDrawable.RECTANGLE);
         drawable.setCornerRadius(dpToPx(context, 10)); // Define o raio do canto
-        drawable.setColor(context.getColor(android.R.color.system_background_light)); // Cor do fundo
+        drawable.setColor(ContextCompat.getColor(context, R.color.GrayLight)); // Cor do fundo
         drawable.setStroke(dpToPx(context, 1), 0x80FFFFFF); // Cor da borda e largura da borda
         return drawable;
     }

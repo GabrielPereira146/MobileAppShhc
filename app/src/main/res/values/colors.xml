@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="Blue_Sapphire">#006494</color>
-    <color name="Blue_Celadon">#247BA0</color>
-    <color name="Blue_Carolina">#1B98E0</color>
-    <color name="Blue_Prussian">#13293D</color>
+    <color name="Blue_Sapphire">#0073E6</color>
+    <color name="Blue_Celadon">#0461CF</color>
+    <color name="Blue_Carolina">#054FB9</color>
+    <color name="Blue_Prussian">#8BABF1</color>
     <color name="Background">#FFFFFFFF</color>
-    <color name="GrayLight">#d8e6e6</color>
+    <color name="GrayLight">#FAF9FD</color>
     <color name="Gray">#A8B3B3</color>
     <color name="BackgorundDark">#000000</color>#000000
     <color name="GrayDark">#484D4D</color>
