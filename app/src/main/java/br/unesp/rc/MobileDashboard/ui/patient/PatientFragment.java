@@ -1,17 +1,24 @@
 package br.unesp.rc.MobileDashboard.ui.patient;
 
+
+import static android.content.ContentValues.TAG;
+
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+
 
 import br.unesp.rc.MobileDashboard.R;
 import br.unesp.rc.MobileDashboard.databinding.FragmentPatientsBinding;
@@ -19,6 +26,7 @@ import br.unesp.rc.MobileDashboard.databinding.FragmentPatientsBinding;
 public class PatientFragment extends Fragment {
 
     private FragmentPatientsBinding binding;
+    String[] labels = {"Temperature", "Blood Pressure", "Glucose", "Heart Rate", "Air Flow", "Oxygen"};
     LinearLayout selectedLayout = null; // Variável para rastrear o LinearLayout selecionado atualmente
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -28,7 +36,7 @@ public class PatientFragment extends Fragment {
         binding = FragmentPatientsBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
         //While(Consumir da API)
-        for (int i= 0; i<10; i++){
+        for (int i= 0; i<6; i++){
             createDynamicLayout(root, patientViewModel);
         }
 
@@ -66,48 +74,88 @@ public class PatientFragment extends Fragment {
     }
 
     private void setLayoutSelected(LinearLayout containerLayout) {
-        String[] labels = {"Temperature", "Blood Pressure", "Glucose", "Heart Rate", "Air Flow", "Oxygen"};
-        for (String label : labels) {
 
-            // Cria um novo LinearLayout (pane)
-            LinearLayout pane = new LinearLayout(containerLayout.getContext());
 
-            // Cria parâmetros de layout com margens
-            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
-                    150 * (int) containerLayout.getContext().getResources().getDisplayMetrics().density,
-                    150 * (int) containerLayout.getContext().getResources().getDisplayMetrics().density
+        // For que divide os panes na posição certa
+        for (int i = 0; i < labels.length/2; i++) {
+            LinearLayout paneSensors = new LinearLayout(containerLayout.getContext());
+            LinearLayout.LayoutParams layoutParamsSensors = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT, // largura
+                    LinearLayout.LayoutParams.WRAP_CONTENT // altura
             );
+            paneSensors.setOrientation(LinearLayout.HORIZONTAL);
+            paneSensors.setLayoutParams(layoutParamsSensors);
+            containerLayout.addView(paneSensors);
 
-            // Define as margens desejadas (esquerda, superior, direita, inferior)
-            layoutParams.setMargins(20 * (int) containerLayout.getContext().getResources().getDisplayMetrics().density,
-                    10 * (int) containerLayout.getContext().getResources().getDisplayMetrics().density,
-                    20 * (int) containerLayout.getContext().getResources().getDisplayMetrics().density,
-                    10 * (int) containerLayout.getContext().getResources().getDisplayMetrics().density);
 
-            // Define os parâmetros de layout no LinearLayout
-            pane.setLayoutParams(layoutParams);
+            // For que cria os Panes
+            for (int j = i; j < Math.min(i + 2, labels.length); j++) {
 
-            pane.setBackgroundColor( containerLayout.getContext().getColor(android.R.color.darker_gray));
-            pane.setOrientation(LinearLayout.HORIZONTAL);
+                // Cria um novo LinearLayout (pane)
+                LinearLayout pane = new LinearLayout(paneSensors.getContext());
 
-            // Outros componentes ao "pane",
-            TextView textView = new TextView(containerLayout.getContext());
-            textView.setLayoutParams(new ViewGroup.LayoutParams(
-                    ViewGroup.LayoutParams.MATCH_PARENT,
-                    ViewGroup.LayoutParams.WRAP_CONTENT
-            ));
-            textView.setGravity(Gravity.CENTER);
-            textView.setTypeface(null, Typeface.BOLD);
-            textView.setText(label);
-            pane.addView(textView);
+                // Cria parâmetros de layout com margens
+                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                        100 * (int) containerLayout.getContext().getResources().getDisplayMetrics().density,
+                        LinearLayout.LayoutParams.WRAP_CONTENT,
+                        1 // Peso
+                );
 
-            // Adiciona o "pane" ao LinearLayout principal
-            containerLayout.addView(pane);
+                // Define as margens desejadas (esquerda, superior, direita, inferior)
+                layoutParams.setMargins(20 * (int) containerLayout.getContext().getResources().getDisplayMetrics().density,
+                        10 * (int) containerLayout.getContext().getResources().getDisplayMetrics().density,
+                        20 * (int) containerLayout.getContext().getResources().getDisplayMetrics().density,
+                        10 * (int) containerLayout.getContext().getResources().getDisplayMetrics().density);
+
+                // Define os parâmetros de layout no LinearLayout
+                pane.setLayoutParams(layoutParams);
+
+                pane.setBackgroundColor(ContextCompat.getColor(containerLayout.getContext(), R.color.SensorP_Normal));
+                pane.setOrientation(LinearLayout.VERTICAL);
+
+                // Outros componentes ao "pane",
+                TextView title = new TextView(pane.getContext());
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                        ViewGroup.LayoutParams.MATCH_PARENT,
+                        ViewGroup.LayoutParams.WRAP_CONTENT
+                );
+
+                params.setMargins(0, 10 * (int) pane.getContext().getResources().getDisplayMetrics().density, 0, 0);
+                title.setLayoutParams(params);
+                title.setGravity(Gravity.CENTER);
+                title.setTypeface(null, Typeface.BOLD);
+                title.setText(labels[j+i]);
+                pane.addView(title);
+
+                TextView stats = new TextView(pane.getContext());
+                LinearLayout.LayoutParams statsParams = new LinearLayout.LayoutParams(
+                        ViewGroup.LayoutParams.MATCH_PARENT,
+                        ViewGroup.LayoutParams.WRAP_CONTENT
+                );
+                statsParams.setMargins(0, 20 * (int) pane.getContext().getResources().getDisplayMetrics().density, 0, 20 * (int) pane.getContext().getResources().getDisplayMetrics().density);
+                stats.setLayoutParams(statsParams);
+                stats.setGravity(Gravity.CENTER);
+                String text  = "Normal";
+                stats.setText(text);
+                stats.setTextColor(ContextCompat.getColor(containerLayout.getContext(), R.color.SensorText_Normal));
+                pane.addView(stats);
+
+                // Adiciona o "pane" ao LinearLayout principal
+                paneSensors.addView(pane);
+
+
+            }
         }
+
     }
 
     private void resetLayoutState(LinearLayout containerLayout) {
-
+        for (int i = 0; i < containerLayout.getChildCount(); i++) {
+          if(i>3)
+              containerLayout.removeViewAt(i);
+            //containerLayout.getChildAt(i).setBackgroundColor(containerLayout.getContext().getColor(android.R.color.black));
+        }
+        containerLayout.removeViewAt(4);
     }
 
 

@@ -12,4 +12,17 @@
     <color name="GrayDark2">#181919</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="SensorP_Normal">#e3fbe3</color>
+    <color name="SensorP_Attention">#ffffe0</color>
+    <color name="SensorP_Alert">#ffe0b5</color>
+    <color name="SensorP_Danger">#ffd8d4</color>
+    <color name="SensorP_Danger2">#e0bcdd</color>
+
+    <color name="SensorText_Normal">#4fe40b</color>
+    <color name="SensorText_Attention">#ffbf00</color>
+    <color name="SensorText_Alert">#ff8c00</color>
+    <color name="SensorText_Danger">#ff0000</color>
+    <color name="SensorText_Danger2">#993399</color>
+
 </resources>

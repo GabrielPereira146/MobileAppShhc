@@ -50,7 +50,7 @@ public class PatientViewModel extends ViewModel {
             textView.setText(labels[i]);
 
 
-           // Define as margens do texto
+           // Define as medidas do texto
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                     70 * (int) context.getResources().getDisplayMetrics().density,
                     LinearLayout.LayoutParams.WRAP_CONTENT
