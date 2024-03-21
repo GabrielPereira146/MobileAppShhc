@@ -1,19 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:showIn="navigation_view">
 
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_patient"
-            android:title="@string/menu_patient" />
+            android:icon="@drawable/ic_patient"
+            android:title="@string/patients" />
         <item
             android:id="@+id/nav_ambulance"
-
+            android:icon="@drawable/ic_ambulance"
             android:title="@string/menu_ambulance" />
         <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="@string/menu_slideshow" />
+            android:id="@+id/nav_doctor"
+            android:icon="@drawable/ic_clinical"
+            android:title="@string/menu_doctor" >
+        </item>
     </group>
+
+    <item android:title="General">
+        <menu>
+            <item
+                android:id="@+id/nav_profile"
+                android:icon="@drawable/ic_profile"
+                android:title="@string/profile"
+                />
+
+            <item android:id="@+id/nav_settings"
+                android:icon="@drawable/ic_settings"
+                android:title="@string/settings" >
+            </item>
+
+        </menu>
+    </item>
+
+    <item android:title="Communicate">
+        <menu>
+            <item
+                android:title="How To Use"
+                android:icon="@drawable/ic_help"
+                android:id="@+id/use"/>
+            <item
+                android:title="Erro Report"
+                android:icon="@drawable/ic_report"
+                android:id="@+id/sugg"/>
+        </menu>
+    </item>
+
+
+
 </menu>

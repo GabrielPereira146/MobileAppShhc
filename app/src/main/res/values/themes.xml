@@ -8,7 +8,11 @@
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/Blue_Prussian</item>
         <item name="colorSecondaryVariant">@color/Blue_Carolina</item>
-        <item name="colorOnSecondary">@color/black</item>
+        <item name="colorOnSecondary">@color/white</item>
+        <item name="android:textColorSecondary">@color/Blue_Sapphire</item>
+
+
+
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
@@ -19,6 +23,36 @@
     <style name="Theme.MobileDashboard.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="SimpleSearchViewStyle">
+        <!-- Change search style -->
+        <item name="type">card</item>
+
+        <!-- Change search hint -->
+        <item name="android:hint">Patients</item>
+
+        <!-- Change search inputType -->
+        <item name="android:inputType">text</item>
+
+        <!-- Change search textColor -->
+        <item name="android:textColor">@color/Gray</item>
+
+        <!-- Search bar/card background-->
+        <item name="searchBackground">@color/GrayLight</item>
+
+        <!-- Change icons alpha -->
+        <item name="backIconAlpha">0.8</item>
+        <item name="iconsAlpha">0.8</item>
+
+        <!-- Change search input colors -->
+        <item name="cursorColor">@color/white</item>
+        <item name="hintColor">@color/Gray</item>
+
+    </style>
+
+    <style name="NavigationViewStyle" >
+        <item name="android:textColor">@color/Gray</item>
     </style>
 
     <style name="Theme.MobileDashboard.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />

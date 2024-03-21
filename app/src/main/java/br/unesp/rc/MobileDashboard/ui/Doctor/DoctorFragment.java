@@ -1,4 +1,4 @@
-package br.unesp.rc.MobileDashboard.ui.slideshow;
+package br.unesp.rc.MobileDashboard.ui.Doctor;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,18 +10,18 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import br.unesp.rc.MobileDashboard.databinding.FragmentSlideshowBinding;
+import br.unesp.rc.MobileDashboard.databinding.FragmentDoctorBinding;
 
-public class SlideshowFragment extends Fragment {
+public class DoctorFragment extends Fragment {
 
-    private FragmentSlideshowBinding binding;
+    private FragmentDoctorBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        SlideshowViewModel slideshowViewModel =
-                new ViewModelProvider(this).get(SlideshowViewModel.class);
+        DoctorViewModel slideshowViewModel =
+                new ViewModelProvider(this).get(DoctorViewModel.class);
 
-        binding = FragmentSlideshowBinding.inflate(inflater, container, false);
+        binding = FragmentDoctorBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         final TextView textView = binding.textSlideshow;

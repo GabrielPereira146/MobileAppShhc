@@ -7,6 +7,7 @@
     tools:context=".MainActivity">
 
     <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -19,13 +20,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:popupTheme="@style/Theme.MobileDashboard"
-                app:title="ShhcApp" />
+                android:background="@color/Background"
+                app:title="ShhcApp"
+                app:titleTextColor="@color/Blue_Sapphire" />
 
             <com.ferfalk.simplesearchview.SimpleSearchView
                 android:id="@+id/searchView"
-                android:layout_width="match_parent"
+                android:layout_width="250dp"
                 android:layout_height="match_parent"
-                android:theme="@style/Theme.MobileDashboard" />
+                android:layout_marginStart="50dp"
+                android:theme="@style/SimpleSearchViewStyle" />
         </FrameLayout>
 
     </com.google.android.material.appbar.AppBarLayout>
