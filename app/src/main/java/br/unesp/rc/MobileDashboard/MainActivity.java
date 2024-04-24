@@ -18,6 +18,12 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 
 import br.unesp.rc.MobileDashboard.databinding.ActivityMainBinding;
+import br.unesp.rc.MobileDashboard.utils.RetrofitService;
+import br.unesp.rc.MobileDashboard.utils.SHHCApiService;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -62,5 +68,22 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
+    }
+
+    private void initializeComponents(){
+        RetrofitService retrofitService = new RetrofitService();
+        SHHCApiService apiService = retrofitService.getRetrofit().create(SHHCApiService.class);
+
+        apiService.getTemperature().enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+            }
+        }l);
     }
 }
