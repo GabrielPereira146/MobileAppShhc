@@ -15,8 +15,16 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import java.io.IOException;
+
 import br.unesp.rc.MobileDashboard.R;
 import br.unesp.rc.MobileDashboard.databinding.FragmentPatientsBinding;
+import br.unesp.rc.MobileDashboard.utils.RetrofitService;
+import br.unesp.rc.MobileDashboard.utils.SHHCApiService;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class PatientFragment extends Fragment {
 

@@ -17,6 +17,8 @@ import androidx.navigation.ui.NavigationUI;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.io.IOException;
+
 import br.unesp.rc.MobileDashboard.databinding.ActivityMainBinding;
 import br.unesp.rc.MobileDashboard.utils.RetrofitService;
 import br.unesp.rc.MobileDashboard.utils.SHHCApiService;
@@ -70,20 +72,5 @@ public class MainActivity extends AppCompatActivity {
                 || super.onSupportNavigateUp();
     }
 
-    private void initializeComponents(){
-        RetrofitService retrofitService = new RetrofitService();
-        SHHCApiService apiService = retrofitService.getRetrofit().create(SHHCApiService.class);
 
-        apiService.getTemperature().enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-
-            }
-
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-
-            }
-        }l);
-    }
 }
