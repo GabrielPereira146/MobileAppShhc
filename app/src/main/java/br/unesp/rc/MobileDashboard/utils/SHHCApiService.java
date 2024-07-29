@@ -8,5 +8,8 @@ public interface SHHCApiService {
     @GET("/temperature")
     Call<ResponseBody> getTemperature();
 
+    @GET("/shhc/")
+    Call<ResponseBody> getNumberAPI();
+
 
 }

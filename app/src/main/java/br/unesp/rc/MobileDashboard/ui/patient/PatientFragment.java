@@ -3,6 +3,8 @@ package br.unesp.rc.MobileDashboard.ui.patient;
 
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,6 +30,11 @@ import retrofit2.Response;
 
 public class PatientFragment extends Fragment {
 
+    private static final long POLLING_INTERVAL_MS = 5000;
+    private Handler handler = new Handler(Looper.getMainLooper());
+    private Runnable pollingRunnable;
+    String baseUrl = "http://10.0.2.2:";
+
     private FragmentPatientsBinding binding;
     String[] labels = {"Temperature", "Blood Pressure", "Glucose", "Heart Rate", "Air Flow", "Oxygen"};
     LinearLayout selectedLayout = null; // Variável para rastrear o LinearLayout selecionado atualmente
@@ -36,14 +43,116 @@ public class PatientFragment extends Fragment {
         PatientViewModel patientViewModel =
                 new ViewModelProvider(this).get(PatientViewModel.class);
 
+
+
         binding = FragmentPatientsBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-        //While(Consumir da API)
-        for (int i= 0; i<6; i++){
+
+        // Inicia o loop de consumo da API
+        startPolling(root, patientViewModel);
+
+//        RetrofitService retrofitService = new RetrofitService(baseUrl + "8080");
+//        SHHCApiService apiService = retrofitService.getRetrofit().create(SHHCApiService.class);
+//
+//        apiService.getNumberAPI().enqueue(new Callback<ResponseBody>() {
+//            @Override
+//            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+//
+//                System.out.println("Request URL: " + call.request().url());
+//                if(response.isSuccessful() && response.body() != null){
+//                    try {
+//                        int numberPatients = Integer.parseInt(response.body().string());
+//                        for (int i= 0; i<numberPatients; i++){
+//                            createDynamicLayout(root, patientViewModel);
+//                        }
+//                    } catch (IOException e) {
+//                        e.printStackTrace();
+//                    }
+//                }else{
+//                    System.err.println("Request failed with code: " + response.code());
+//                }
+//
+//            }
+//
+//            @Override
+//            public void onFailure(Call<ResponseBody> call, Throwable t) {
+//                t.printStackTrace();
+//            }
+//        });
+
+//        for (int i= 0; i<6; i++){
+//            createDynamicLayout(root, patientViewModel);
+//        }
+        return root;
+    }
+
+    private void startPolling(View root, PatientViewModel patientViewModel){
+        pollingRunnable = new Runnable() {
+            @Override
+            public void run() {
+
+                // Atualiza os dados
+                fetchData(root, patientViewModel);
+
+                // Intervalo de 5 segundos
+                handler.postDelayed(this, POLLING_INTERVAL_MS);
+            }
+        };
+        handler.post(pollingRunnable);
+    }
+
+    private void fetchData(View root, PatientViewModel patientViewModel) {
+
+        // Inicializando variáveis para consumo
+        RetrofitService retrofitService = new RetrofitService(baseUrl + "8080");
+        SHHCApiService apiService = retrofitService.getRetrofit().create(SHHCApiService.class);
+
+        apiService.getNumberAPI().enqueue(new Callback<ResponseBody>() {
+
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+                System.out.println("Request URL: " + call.request().url());
+
+                // Verifica se os dados foram requisitados com sucesso
+                if(response.isSuccessful() && response.body() != null){
+                    try {
+
+                        /**
+                         * Variável que armazena quantos pacientes na API tem
+                         */
+                        int numberPatients = Integer.parseInt(response.body().string());
+
+                        // Atualizando o layout com base nos pacientes existentes
+                        updateLayout(numberPatients, root, patientViewModel);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }else{
+                    System.err.println("Request failed with code: " + response.code());
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
+    }
+
+
+    private void updateLayout(int numberPatients, View root, PatientViewModel patientViewModel){
+        // Encontrar o contêiner onde as views dinâmicas são adicionadas
+        LinearLayout container = root.findViewById(R.id.container);
+
+        // Limpar layouts antigos
+        container.removeAllViews();
+
+        // Adicionar novas views
+        for (int i = 0; i < numberPatients; i++) {
             createDynamicLayout(root, patientViewModel);
         }
-
-        return root;
     }
 
     private void createDynamicLayout(View root,  PatientViewModel patientViewModel) {
@@ -166,5 +275,6 @@ public class PatientFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+        handler.removeCallbacks(pollingRunnable);
     }
 }

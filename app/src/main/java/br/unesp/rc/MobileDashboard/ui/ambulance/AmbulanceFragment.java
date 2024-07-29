@@ -43,32 +43,7 @@ public class AmbulanceFragment extends Fragment {
 //        LinearLayout dynamicLayout = ambulanceViewModel; //Arrumar
 
 
-        RetrofitService retrofitService = new RetrofitService();
-        SHHCApiService apiService = retrofitService.getRetrofit().create(SHHCApiService.class);
 
-        apiService.getTemperature().enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    String responseData = response.body().string();
-
-                    getActivity().runOnUiThread(()-> {
-                        TextView textView = new TextView(root.findViewById());
-                        textView.setText(responseData);
-                    });
-                } catch (IOException e){
-                    e.printStackTrace();
-                }
-
-            }
-
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                /**
-                 * Manipular erro do servidor aqui
-                 */
-            }
-        });
     }
 
     @Override

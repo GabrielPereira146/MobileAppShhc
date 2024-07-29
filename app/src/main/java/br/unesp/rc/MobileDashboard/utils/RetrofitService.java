@@ -10,13 +10,13 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RetrofitService {
     private Retrofit retrofit;
 
-    public RetrofitService(){
-        initializeRetrofit();
+    public RetrofitService(String baseUrl){
+        initializeRetrofit(baseUrl);
     }
 
-    public void initializeRetrofit(){
+    public void initializeRetrofit(String baseUrl){
         retrofit = new Retrofit.Builder()
-                .baseUrl("http://localhost:8080")
+                .baseUrl(baseUrl) //
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
     }
