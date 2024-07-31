@@ -45,17 +45,17 @@ public class PatientViewModel extends ViewModel {
         for (int i = 0; i < labels.length; i++) {
             TextView textView = new TextView(context);
             textView.setLayoutParams(new ViewGroup.LayoutParams(
-                    70 * (int) context.getResources().getDisplayMetrics().density,
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
                     ViewGroup.LayoutParams.WRAP_CONTENT
             ));
-            textView.setGravity(Gravity.END);
+            textView.setGravity(Gravity.START);
             textView.setTypeface(null, Typeface.BOLD);
             textView.setText(labels[i]);
 
 
            // Define as medidas do texto
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                    70 * (int) context.getResources().getDisplayMetrics().density,
+                    LinearLayout.LayoutParams.MATCH_PARENT,
                     LinearLayout.LayoutParams.WRAP_CONTENT
             );
 
